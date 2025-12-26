@@ -27,12 +27,14 @@
       🟢 Advisor online
     </div>
 
-    <textarea id="msg"
+    <textarea
+      id="msg"
       placeholder="Type your message..."
       style="width:100%;height:120px;
       background:#000;color:#fff;
       border:1px solid #333;
-      border-radius:10px;padding:12px;"></textarea>
+      border-radius:10px;padding:12px;"
+    ></textarea>
 
     <br><br>
 
@@ -42,17 +44,61 @@
   </div>
 </div>
 
-<script>
-function sendMsg() {
-  let msg = document.getElementById("msg").value;
-  if(msg.trim()===""){
-    alert("Please type a message");
-    return;
-  }
-  document.getElementById("status").innerText =
-    "✔ Message sent. Please wait for response.";
-  document.getElementById("msg").value = "";
-}
+<!-- 🔥 FIREBASE CHAT BACKBONE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // 🔐 Firebase Config (tumhara)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCX8yGRJc5AcxSEaaC6AzNLZzxtOCz83Sk",
+    authDomain: "lagneshmitra-e57b8.firebaseapp.com",
+    projectId: "lagneshmitra-e57b8",
+    storageBucket: "lagneshmitra-e57b8.firebasestorage.app",
+    messagingSenderId: "420798143606",
+    appId: "1:420798143606:web:4d73ee3c6d4a938b415357"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 🌐 Expose function globally for button
+  window.sendMsg = async function () {
+    const input = document.getElementById("msg");
+    const status = document.getElementById("status");
+    const text = input.value.trim();
+
+    if (!text) {
+      alert("Please type a message");
+      return;
+    }
+
+    status.style.color = "#aaa";
+    status.innerText = "Sending...";
+
+    try {
+      await addDoc(collection(db, "chats"), {
+        message: text,
+        sender: "user",
+        status: "unread",
+        timestamp: serverTimestamp()
+      });
+
+      input.value = "";
+      status.style.color = "#6cff6c";
+      status.innerText = "✔ Message sent. Please wait for response.";
+
+    } catch (err) {
+      console.error(err);
+      status.style.color = "#ff6c6c";
+      status.innerText = "❌ Error sending message. Please try again.";
+    }
+  };
 </script>
 
 </body>
