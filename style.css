@@ -33,9 +33,9 @@ nav {
 
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 22px;
 
-  padding: 12px 22px;
+  padding: 12px 18px;
   background: linear-gradient(
     90deg,
     rgba(15, 23, 42, 0.95),
@@ -52,16 +52,27 @@ nav {
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--accent);
-  margin-right: auto;
   white-space: nowrap;
 }
 
+/* 🔥 FIXED NAV LINKS */
 .nav-links {
   display: flex;
-  gap: 26px;
+  gap: 22px;
+  margin-left: auto;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 nav a {
+  display: inline-flex;
+  align-items: center;
+
   color: #f9fafb;
   text-decoration: none;
   font-weight: 500;
@@ -152,67 +163,16 @@ nav a.active::after {
   box-shadow: 0 16px 40px rgba(250, 204, 21, 0.6);
 }
 
-/* ================= LIVE DM CARD ================= */
-.dm-card {
-  margin: 32px auto 0;
-  padding: 26px 24px;
-
-  max-width: 560px;
-  text-align: left;
-
-  background: linear-gradient(
-    180deg,
-    rgba(20, 30, 60, 0.96),
-    rgba(5, 10, 25, 0.96)
-  );
-
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.dm-card p {
-  font-size: 15px;
-  color: var(--text-soft);
-}
-
-.dm-card ul {
-  margin: 14px 0 0;
-  padding-left: 18px;
-}
-
-.dm-card li {
-  font-size: 14px;
-  line-height: 1.8;
-  opacity: 0.92;
-  margin-bottom: 6px;
-}
-
-.dm-note {
-  margin-top: 14px;
-  font-size: 13px;
-  opacity: 0.75;
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-  }
-
-  .brand {
-    font-size: 18px;
   }
 
   .nav-links {
     width: 100%;
-    flex-wrap: wrap;
-    gap: 14px;
+    padding-top: 6px;
   }
 
   .main {
@@ -227,9 +187,5 @@ nav a.active::after {
   .button {
     width: 100%;
     text-align: center;
-  }
-
-  .dm-card {
-    padding: 22px 20px;
   }
 }
