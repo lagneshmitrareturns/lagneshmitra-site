@@ -1,3 +1,4 @@
+console.log("posts.js LOADED");
 import {
   db,
   collection,
@@ -106,3 +107,4 @@ window.sharePost = function () {
 
 /* ================= INIT ================= */
 loadPosts();
+
