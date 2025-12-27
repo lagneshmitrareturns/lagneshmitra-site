@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- MAIN CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -43,11 +43,8 @@
 
 <!-- ================= POSTS SECTION ================= -->
 <div class="post-highlight">
-
   <h3>Latest Posts</h3>
-
-  <!-- 🔥 POSTS WILL BE INSERTED HERE BY posts.js -->
-  <!-- DO NOT REMOVE -->
+  <!-- posts.js will inject cards here -->
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -56,7 +53,6 @@
 
     <div class="post-close" onclick="closePost()">✕</div>
 
-    <!-- REQUIRED SELECTORS FOR posts.js -->
     <h1></h1>
 
     <div class="post-stats"></div>
@@ -71,7 +67,7 @@
   </div>
 </div>
 
-<!-- ================= CORE JS (MODAL CLOSE ONLY) ================= -->
+<!-- ================= CORE JS ================= -->
 <script>
   function closePost() {
     document.getElementById("postModal").classList.remove("active");
@@ -83,20 +79,17 @@
       document.querySelector("#postModal h1")?.innerText || "LagneshMitra Post";
 
     if (navigator.share) {
-      navigator.share({
-        title: title,
-        url: window.location.href
-      });
+      navigator.share({ title, url: window.location.href });
     } else {
       alert("Copy link and share manually.");
     }
   }
 </script>
 
-<!-- ================= FIREBASE + POSTS ================= -->
-<!-- ⚠️ ORDER IS IMPORTANT -->
-<script type="module" src="firebase.js"></script>
-<script type="module" src="posts.js"></script>
+<!-- ================= MODULE SCRIPTS ================= -->
+<!-- IMPORTANT: relative path, no leading slash -->
+<script type="module" src="./firebase.js"></script>
+<script type="module" src="./posts.js"></script>
 
 </body>
 </html>
