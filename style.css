@@ -33,7 +33,8 @@ nav {
 
   display: flex;
   align-items: center;
-  gap: 22px;
+  flex-wrap: wrap;                /* ✅ FIX */
+  gap: 18px;
 
   padding: 12px 18px;
   background: linear-gradient(
@@ -51,18 +52,22 @@ nav {
   font-size: 20px;
   font-weight: 600;
   color: var(--accent);
+  white-space: nowrap;
 }
 
+/* 🔥 NAV LINKS SAFE */
 .nav-links {
   display: flex;
-  gap: 22px;
+  gap: 18px;
   margin-left: auto;
+  flex-wrap: wrap;               /* ✅ FIX */
 }
 
 nav a {
   color: #f9fafb;
   text-decoration: none;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 nav a:hover,
@@ -118,7 +123,7 @@ nav a.active {
 }
 
 /* =====================================================
-   POST OF THE DAY (INDEX)
+   POST OF THE DAY
 ===================================================== */
 
 .post-highlight {
@@ -135,21 +140,17 @@ nav a.active {
 
 /* ================= POST CARD ================= */
 .post-card {
-  max-width: 960px;        /* ✅ fit-to-screen */
+  max-width: 960px;
   margin: 0 auto;
 
   background: #000;
-  padding: 32px 36px;
+  padding: 34px 38px;
   border-radius: 22px;
 
   cursor: pointer;
   border: 1px solid rgba(250,204,21,0.25);
 
-  transition:
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
-
-  will-change: box-shadow; /* 🔒 no layout shift */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .post-card:hover {
@@ -159,11 +160,11 @@ nav a.active {
     0 0 30px rgba(250,204,21,0.22);
 }
 
-/* ================= TITLE ================= */
+/* TITLE */
 .post-card h4 {
   font-size: 20px;
   line-height: 1.45;
-  margin-bottom: 22px;   /* ✅ title–body gap */
+  margin-bottom: 22px;
   color: #f9fafb;
 }
 
@@ -171,7 +172,7 @@ nav a.active {
   color: var(--accent);
 }
 
-/* ================= BODY ================= */
+/* BODY */
 .post-card p {
   font-size: 15.5px;
   line-height: 1.9;
@@ -179,7 +180,7 @@ nav a.active {
   margin-bottom: 22px;
 }
 
-/* ================= META ================= */
+/* META */
 .post-meta {
   font-size: 13px;
   opacity: 0.75;
@@ -187,7 +188,7 @@ nav a.active {
 }
 
 /* =====================================================
-   POST MODAL (POPUP)
+   POST MODAL
 ===================================================== */
 
 .post-modal {
@@ -207,7 +208,6 @@ nav a.active {
   display: flex;
 }
 
-/* ================= MODAL BOX ================= */
 .post-modal-box {
   max-width: 600px;
   width: 100%;
@@ -229,7 +229,6 @@ nav a.active {
   to   { transform: scale(1); opacity: 1; }
 }
 
-/* ================= CLOSE ================= */
 .post-close {
   position: absolute;
   top: 14px;
@@ -241,6 +240,15 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  nav {
+    gap: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .main {
     margin: 36px 16px;
     padding: 30px 24px;
