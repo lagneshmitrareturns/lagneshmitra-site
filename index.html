@@ -41,58 +41,25 @@
   </div>
 </div>
 
-<!-- ================= POSTS SECTION (ROLLBACK TEST) ================= -->
+<!-- ================= POSTS SECTION ================= -->
 <div class="post-highlight">
-  <h3>Post of the Day</h3>
+  <h3>Latest Posts</h3>
 
-  <!-- 🔥 THIS ELEMENT IS CRITICAL -->
-  <div class="post-card" id="testPost">
-    <h4>STATIC TEST POST</h4>
-    <p>If you can read this, HTML + CSS are working.</p>
-    <div class="post-meta">👁 0 views | 📍 Local</div>
+  <!-- 🔥 STATIC HTML PROOF -->
+  <div class="post-card">
+    <h4>STATIC HTML POST</h4>
+    <p>If this is visible, HTML + CSS are OK.</p>
+    <div class="post-meta">👁 0 views | 📍 HTML</div>
   </div>
 </div>
 
-<!-- ================= POST MODAL ================= -->
-<div class="post-modal" id="postModal">
-  <div class="post-modal-box">
-
-    <div class="post-close" onclick="closePost()">✕</div>
-
-    <h1></h1>
-    <div class="post-stats"></div>
-    <div class="post-content"></div>
-
-    <div class="post-actions-full">
-      <a href="chat.html" class="button">Talk to LagneshMitra</a>
-      <button class="button outline" onclick="sharePost()">Share</button>
-    </div>
-
-  </div>
-</div>
-
-<!-- ================= CORE JS ================= -->
+<!-- ================= JS LOAD TEST ================= -->
 <script>
-  function closePost() {
-    document.getElementById("postModal").classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
-
-  function sharePost() {
-    const title =
-      document.querySelector("#postModal h1")?.innerText || "LagneshMitra Post";
-
-    if (navigator.share) {
-      navigator.share({ title, url: window.location.href });
-    } else {
-      alert("Copy link and share manually.");
-    }
-  }
+  alert("🔥 index.html JS IS RUNNING");
 </script>
 
-<!-- ================= MODULE SCRIPTS ================= -->
-<script type="module" src="./firebase.js"></script>
-<script type="module" src="./posts.js"></script>
+<!-- ================= posts.js (NO MODULE) ================= -->
+<script src="./posts.js"></script>
 
 </body>
 </html>
