@@ -41,10 +41,16 @@
   </div>
 </div>
 
-<!-- ================= POSTS SECTION ================= -->
+<!-- ================= POSTS SECTION (ROLLBACK TEST) ================= -->
 <div class="post-highlight">
-  <h3>Latest Posts</h3>
-  <!-- posts.js will inject cards here -->
+  <h3>Post of the Day</h3>
+
+  <!-- 🔥 THIS ELEMENT IS CRITICAL -->
+  <div class="post-card" id="testPost">
+    <h4>STATIC TEST POST</h4>
+    <p>If you can read this, HTML + CSS are working.</p>
+    <div class="post-meta">👁 0 views | 📍 Local</div>
+  </div>
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -54,9 +60,7 @@
     <div class="post-close" onclick="closePost()">✕</div>
 
     <h1></h1>
-
     <div class="post-stats"></div>
-
     <div class="post-content"></div>
 
     <div class="post-actions-full">
@@ -87,7 +91,6 @@
 </script>
 
 <!-- ================= MODULE SCRIPTS ================= -->
-<!-- IMPORTANT: relative path, no leading slash -->
 <script type="module" src="./firebase.js"></script>
 <script type="module" src="./posts.js"></script>
 
