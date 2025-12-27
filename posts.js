@@ -4,7 +4,7 @@ console.log("posts.js running in SAFE MODE");
 const postSection = document.querySelector(".post-highlight");
 
 if (!postSection) {
-  console.error("post-highlight not found");
+  console.error("❌ .post-highlight not found");
 }
 
 /* ================= TEMP POSTS DATA ================= */
@@ -40,6 +40,7 @@ function renderPosts() {
 
     card.innerHTML = `
       <h4>${post.title}</h4>
+
       <p>${post.excerpt}</p>
 
       <div class="post-meta">
