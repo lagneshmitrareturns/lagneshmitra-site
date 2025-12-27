@@ -1,4 +1,5 @@
 console.log("posts.js LOADED");
+
 import {
   db,
   collection,
@@ -12,6 +13,15 @@ import {
 
 /* ================= DOM TARGETS ================= */
 const postSection = document.querySelector(".post-highlight");
+
+/* Create cards container safely */
+let cardsContainer = document.querySelector(".posts-container");
+if (!cardsContainer) {
+  cardsContainer = document.createElement("div");
+  cardsContainer.className = "posts-container";
+  postSection.appendChild(cardsContainer);
+}
+
 const modal = document.getElementById("postModal");
 
 /* ================= LOAD POSTS ================= */
@@ -22,6 +32,11 @@ async function loadPosts() {
   );
 
   const snapshot = await getDocs(q);
+
+  if (snapshot.empty) {
+    console.warn("No posts found in Firestore");
+    return;
+  }
 
   snapshot.forEach(docSnap => {
     const post = docSnap.data();
@@ -40,7 +55,7 @@ async function loadPosts() {
     card.innerHTML = `
       <h4>${post.title}</h4>
 
-      <p>${post.excerpt}</p>
+      <p>${post.excerpt ?? ""}</p>
 
       <div class="post-meta">
         👁 ${post.views ?? 0} views &nbsp; | &nbsp; 📍 ${post.source ?? "Direct"}
@@ -52,36 +67,41 @@ async function loadPosts() {
       </div>
     `;
 
-    postSection.appendChild(card);
+    cardsContainer.appendChild(card);
   });
 }
 
 /* ================= OPEN POST ================= */
 async function openPostFromData(postId, post) {
-  /* 🔥 INCREMENT VIEWS */
-  const ref = doc(db, "posts", postId);
-  await updateDoc(ref, {
-    views: increment(1)
-  });
+  /* 🔥 Increment views safely */
+  try {
+    const ref = doc(db, "posts", postId);
+    await updateDoc(ref, { views: increment(1) });
+  } catch (e) {
+    console.warn("View increment failed:", e.message);
+  }
 
   /* ================= FILL MODAL ================= */
   modal.querySelector("h1").innerText = post.title;
-  modal.querySelector(".subtitle").innerText = "(And What It Actually Means)";
 
-  modal.querySelector(".post-stats").innerHTML = `
-    <span>👁 ${(post.views ?? 0) + 1} views</span>
-    <span>📍 ${post.source ?? "Direct"}</span>
-    <span>🕒 Updated Today</span>
-  `;
+  const stats = modal.querySelector(".post-stats");
+  if (stats) {
+    stats.innerHTML = `
+      <span>👁 ${(post.views ?? 0) + 1} views</span>
+      <span>📍 ${post.source ?? "Direct"}</span>
+      <span>🕒 Updated Today</span>
+    `;
+  }
 
-  modal.querySelector(".post-content").innerHTML = `
-    ${post.content
+  const contentBox = modal.querySelector(".post-content");
+  if (contentBox) {
+    contentBox.innerHTML = post.content
       .split("\n")
-      .map(p => `<p>${p}</p>`)
-      .join("")}
-  `;
+      .filter(p => p.trim())
+      .map(p => `<p style="margin-bottom:18px;">${p}</p>`)
+      .join("");
+  }
 
-  /* ================= SHOW MODAL ================= */
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -107,4 +127,3 @@ window.sharePost = function () {
 
 /* ================= INIT ================= */
 loadPosts();
-
