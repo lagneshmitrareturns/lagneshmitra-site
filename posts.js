@@ -1,4 +1,5 @@
-console.log("posts.js LOADED");
+alert("posts.js loaded");
+console.log("posts.js loaded");
 
 /* ================= FIREBASE IMPORTS ================= */
 import {
@@ -151,3 +152,4 @@ function escapeHTML(str) {
 
 /* ================= INIT ================= */
 loadPosts();
+
