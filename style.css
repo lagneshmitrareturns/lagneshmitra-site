@@ -99,7 +99,7 @@ nav a.active::after {
 /* ================= MAIN HERO ================= */
 .main {
   max-width: 1100px;
-  margin: 50px auto;
+  margin: 48px auto;
   padding: 44px;
   background: linear-gradient(
     180deg,
@@ -149,47 +149,59 @@ nav a.active::after {
 }
 
 /* =====================================================
-   POST OF THE DAY (INDEX)
+   POST OF THE DAY (INDEX) – ALIGNMENT LOCK
 ===================================================== */
 
 .post-highlight {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 30px;
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 32px;
   background: linear-gradient(180deg,#0f172a,#020617);
   border-radius: 20px;
   box-shadow: 0 20px 45px rgba(0,0,0,0.6);
 }
 
 .post-highlight h3 {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   color: var(--accent);
+  text-align: left;
 }
 
+/* ================= POST CARD (BUTTON FEEL) ================= */
 .post-card {
-  background: #000;
-  padding: 22px;
-  border-radius: 16px;
-  transition: all 0.35s ease;
+  background: radial-gradient(circle at top,#050505,#000);
+  padding: 24px;
+  border-radius: 18px;
   cursor: pointer;
-  border: 1px solid rgba(250,204,21,0.08);
+
+  border: 1px solid rgba(250,204,21,0.18);
+  box-shadow:
+    inset 0 0 0 rgba(250,204,21,0),
+    0 14px 30px rgba(0,0,0,0.6);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border 0.25s ease;
 }
 
+/* 🔥 BUTTON-LIKE HOVER */
 .post-card:hover {
-  transform: translateY(-6px);
-  border: 1px solid rgba(250,204,21,0.35);
+  transform: translateY(-5px);
+  border: 1px solid rgba(250,204,21,0.55);
   box-shadow:
-    0 18px 45px rgba(0,0,0,0.8),
-    0 0 25px rgba(250,204,21,0.18);
+    inset 0 0 18px rgba(250,204,21,0.08),
+    0 22px 50px rgba(0,0,0,0.85),
+    0 0 26px rgba(250,204,21,0.28);
 }
 
 .post-card h4 {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  color: #f9fafb;
 }
 
-.post-card h4 a {
-  color: #f9fafb;
-  text-decoration: none;
+.post-card:hover h4 {
+  color: var(--accent);
 }
 
 .post-card p {
@@ -200,8 +212,8 @@ nav a.active::after {
 
 .post-meta {
   font-size: 12px;
-  opacity: 0.7;
-  margin: 12px 0;
+  opacity: 0.75;
+  margin: 14px 0;
 }
 
 .post-actions {
@@ -236,7 +248,7 @@ nav a.active::after {
   max-height: 90vh;
   background: linear-gradient(180deg,#0f172a,#020617);
   border-radius: 22px;
-  padding: 36px;
+  padding: 40px;
   overflow-y: auto;
   box-shadow: 0 30px 80px rgba(0,0,0,0.8);
   position: relative;
@@ -260,38 +272,6 @@ nav a.active::after {
   color: var(--accent);
 }
 
-.post-modal h1 {
-  font-size: 28px;
-}
-
-.post-modal .subtitle {
-  font-size: 14px;
-  color: var(--accent);
-  margin-top: 6px;
-}
-
-.post-stats {
-  display: flex;
-  gap: 18px;
-  font-size: 12px;
-  opacity: 0.75;
-  margin: 18px 0 28px;
-  flex-wrap: wrap;
-}
-
-.post-content p {
-  font-size: 16px;
-  line-height: 1.9;
-  margin-bottom: 18px;
-}
-
-.post-actions-full {
-  display: flex;
-  gap: 16px;
-  margin-top: 36px;
-  flex-wrap: wrap;
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
   nav {
@@ -311,6 +291,7 @@ nav a.active::after {
 
   .post-highlight {
     margin: 40px 16px;
+    padding: 26px;
   }
 
   .post-modal-box {
@@ -321,4 +302,4 @@ nav a.active::after {
     width: 100%;
     text-align: center;
   }
-    }
+}
