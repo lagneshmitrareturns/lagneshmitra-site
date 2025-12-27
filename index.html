@@ -45,25 +45,58 @@
 <div class="post-highlight">
   <h3>Latest Posts</h3>
 
-  <!-- 🔥 STATIC HTML PROOF -->
+  <!-- 🔒 STATIC HTML PROOF (TEMP) -->
   <div class="post-card">
     <h4>STATIC HTML POST</h4>
-    <p>If this is visible, HTML + CSS are OK.</p>
+    <p>If you can see this, HTML + CSS are working.</p>
     <div class="post-meta">👁 0 views | 📍 HTML</div>
+  </div>
+
+  <!-- 🔥 posts.js will inject posts BELOW this -->
+</div>
+
+<!-- ================= POST MODAL ================= -->
+<div class="post-modal" id="postModal">
+  <div class="post-modal-box">
+
+    <div class="post-close" onclick="closePost()">✕</div>
+
+    <h1></h1>
+    <div class="post-stats"></div>
+    <div class="post-content"></div>
+
+    <div class="post-actions-full">
+      <a href="chat.html" class="button">Talk to LagneshMitra</a>
+      <button class="button outline" onclick="sharePost()">Share</button>
+    </div>
+
   </div>
 </div>
 
+<!-- ================= CORE JS (ONLY MODAL HELPERS) ================= -->
 <script>
   alert("www.lagneshmitra.com says:\n\nIndex.html JS IS RUNNING");
-</script>
-<!-- ================= JS LOAD TEST ================= -->
-<script>
-  alert("🔥 index.html JS IS RUNNING");
+
+  function closePost() {
+    document.getElementById("postModal").classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+
+  function sharePost() {
+    const title =
+      document.querySelector("#postModal h1")?.innerText || "LagneshMitra Post";
+
+    if (navigator.share) {
+      navigator.share({ title, url: window.location.href });
+    } else {
+      alert("Copy link and share manually.");
+    }
+  }
 </script>
 
-<!-- ================= posts.js (NO MODULE) ================= -->
-<script src="./posts.js"></script>
+<!-- ================= MODULE SCRIPTS (IMPORTANT ORDER) ================= -->
+<script type="module" src="./firebase.js"></script>
+<script type="module" src="./posts.js"></script>
 
 </body>
 </html>
-
