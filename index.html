@@ -40,7 +40,7 @@
 <!-- ================= POSTS (AUTO FROM FIREBASE) ================= -->
 <div class="post-highlight">
   <h3>Latest Posts</h3>
-  <!-- 🔥 post-card elements will be injected here by posts.js -->
+  <!-- 🔥 post cards injected by posts.js -->
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -49,11 +49,12 @@
 
     <div class="post-close" onclick="closePost()">✕</div>
 
-    <h1 id="modalTitle"></h1>
+    <!-- 🔥 selectors used by posts.js -->
+    <h1></h1>
 
-    <div class="post-stats" id="modalMeta"></div>
+    <div class="post-stats"></div>
 
-    <div class="post-content" id="modalContent"></div>
+    <div class="post-content"></div>
 
     <div class="post-actions-full">
       <a href="chat.html" class="button">Talk to LagneshMitra</a>
@@ -62,49 +63,6 @@
 
   </div>
 </div>
-
-<!-- ================= CORE JS (MODAL CONTROL) ================= -->
-<script>
-  function openPostFromData(post) {
-    document.getElementById("modalTitle").innerText = post.title;
-
-    document.getElementById("modalMeta").innerHTML = `
-      <span>👁 ${post.views || 0} views</span>
-      <span>📍 ${post.source || "Direct"}</span>
-    `;
-
-    const contentDiv = document.getElementById("modalContent");
-    contentDiv.innerHTML = "";
-
-    post.content.split("\n").forEach(p => {
-      if (p.trim()) {
-        const para = document.createElement("p");
-        para.innerText = p;
-        para.style.marginBottom = "18px";   // ✅ body gap fixed
-        contentDiv.appendChild(para);
-      }
-    });
-
-    document.getElementById("postModal").classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closePost() {
-    document.getElementById("postModal").classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
-
-  function sharePost() {
-    if (navigator.share) {
-      navigator.share({
-        title: document.getElementById("modalTitle").innerText,
-        url: window.location.href
-      });
-    } else {
-      alert("Please copy the link and share manually.");
-    }
-  }
-</script>
 
 <!-- ================= FIREBASE + POSTS ================= -->
 <script type="module" src="firebase.js"></script>
