@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Post – LagneshMitra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+  <div class="brand">LagneshMitra</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="report.html">Reports</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="main">
+
+  <h2>Add New Post</h2>
+  <p style="margin-bottom:30px;">
+    This section is for publishing structured posts that will appear on the website.
+  </p>
+
+  <div class="post-form">
+
+    <label>Post Title</label>
+    <input type="text" id="title" placeholder="Enter post title">
+
+    <label>Post Content</label>
+    <textarea id="content" placeholder="Write the full post here..."></textarea>
+
+    <label>Tags / Keywords</label>
+    <input type="text" id="tags" placeholder="marriage delay, saturn, astrology">
+
+    <button class="button" onclick="publishPost()">Publish Post</button>
+
+    <p id="status" style="margin-top:18px;color:#6cff6c;"></p>
+
+  </div>
+
+</div>
+
+<script>
+function publishPost() {
+  let title = document.getElementById("title").value;
+  let content = document.getElementById("content").value;
+
+  if(title.trim()==="" || content.trim()===""){
+    alert("Title and content are required");
+    return;
+  }
+
+  document.getElementById("status").innerText =
+    "Post ready. Backend connection will publish it.";
+}
+</script>
+
+</body>
+</html>
