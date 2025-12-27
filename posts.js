@@ -1,3 +1,8 @@
+document.body.insertAdjacentHTML(
+  "afterbegin",
+  "<div style='padding:10px;color:#22c55e;font-size:14px'>posts.js LOADED</div>"
+);
+
 console.log("posts.js LOADED");
 
 /* ================= FIREBASE IMPORTS ================= */
@@ -186,3 +191,4 @@ function escapeHTML(str) {
 
 /* ================= INIT ================= */
 loadPosts();
+
