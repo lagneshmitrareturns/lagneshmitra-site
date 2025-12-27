@@ -57,7 +57,6 @@ nav a {
   color: #f9fafb;
   text-decoration: none;
   font-weight: 500;
-  position: relative;
 }
 
 nav a:hover,
@@ -99,27 +98,56 @@ nav a.active {
   border: 1px solid var(--accent);
 }
 
-/* ================= POST CARD ================= */
+/* ================= POST OF THE DAY ================= */
 .post-highlight {
-  max-width: 1100px;
+  max-width: 100%;
   margin: 48px auto;
-  padding: 32px;
-  background: linear-gradient(180deg,#0f172a,#020617);
-  border-radius: 20px;
+  padding: 0 16px;
 }
 
 .post-card {
+  max-width: 920px;                 /* 🔥 editorial width */
+  margin: 0 auto;
   background: #000;
-  padding: 24px;
-  border-radius: 18px;
+  padding: 30px 32px;               /* 🔥 more breathing */
+  border-radius: 20px;
   cursor: pointer;
   border: 1px solid rgba(250,204,21,0.25);
   transition: 0.3s;
 }
 
 .post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+  transform: translateY(-6px);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.85),
+    0 0 28px rgba(250,204,21,0.25);
+}
+
+/* 🔥 TITLE */
+.post-card h4 {
+  font-size: 19px;
+  line-height: 1.4;
+  margin-bottom: 18px;              /* ✅ title–body gap */
+  color: #f9fafb;
+}
+
+.post-card:hover h4 {
+  color: var(--accent);
+}
+
+/* 🔥 BODY */
+.post-card p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-soft);
+  margin-bottom: 18px;              /* ✅ body–meta gap */
+}
+
+/* META */
+.post-meta {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 20px;
 }
 
 /* ================= MODAL ================= */
@@ -136,7 +164,7 @@ nav a.active {
 }
 
 .post-modal.active {
-  display: flex !important;
+  display: flex;
 }
 
 .post-modal-box {
@@ -145,7 +173,7 @@ nav a.active {
   max-height: 90vh;
   background: linear-gradient(180deg,#0f172a,#020617);
   border-radius: 26px;
-  padding: 36px 28px;
+  padding: 36px 30px;
   overflow-y: auto;
   box-shadow: 0 40px 100px rgba(0,0,0,0.9);
   position: relative;
@@ -168,9 +196,16 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  .post-card {
+    padding: 22px 20px;
+  }
+
+  .post-card h4 {
+    font-size: 17px;
+  }
+
   .post-modal-box {
     max-width: 95%;
     padding: 24px;
   }
 }
-
