@@ -37,12 +37,10 @@
   </div>
 </div>
 
-<!-- ================= POSTS (FROM FIREBASE) ================= -->
+<!-- ================= POSTS (AUTO FROM FIREBASE) ================= -->
 <div class="post-highlight">
   <h3>Latest Posts</h3>
-
-  <!-- 🔥 POSTS WILL AUTO-LOAD HERE -->
-  <!-- post-card elements will be injected by posts.js -->
+  <!-- 🔥 post-card elements injected by posts.js -->
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -52,7 +50,6 @@
     <div class="post-close" onclick="closePost()">✕</div>
 
     <h1 id="modalTitle"></h1>
-    <span class="subtitle" id="modalSubtitle"></span>
 
     <div class="post-stats" id="modalMeta"></div>
 
@@ -66,8 +63,33 @@
   </div>
 </div>
 
-<!-- ================= CORE JS ================= -->
+<!-- ================= CORE JS (MODAL CONTROL) ================= -->
 <script>
+  function openPostFromData(post) {
+    document.getElementById("modalTitle").innerText = post.title;
+
+    document.getElementById("modalMeta").innerHTML = `
+      <span>👁 ${post.views || 0} views</span>
+      <span>📍 ${post.source || "Direct"}</span>
+    `;
+
+    // convert plain text → paragraphs
+    const contentDiv = document.getElementById("modalContent");
+    contentDiv.innerHTML = "";
+
+    post.content.split("\n").forEach(p => {
+      if (p.trim()) {
+        const para = document.createElement("p");
+        para.innerText = p;
+        para.style.marginBottom = "18px";   // ✅ body gap fix
+        contentDiv.appendChild(para);
+      }
+    });
+
+    document.getElementById("postModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
   function closePost() {
     document.getElementById("postModal").classList.remove("active");
     document.body.style.overflow = "auto";
@@ -80,7 +102,7 @@
         url: window.location.href
       });
     } else {
-      alert("Please copy the link and share manually.");
+      alert("Copy link and share manually.");
     }
   }
 </script>
