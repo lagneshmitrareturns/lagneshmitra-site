@@ -30,11 +30,12 @@
     Clear answers. No fluff. No drama.
   </p>
 
-  <a href="dmlive.html" class="button">Start Live Chat</a>
-  <br><br>
-  <a href="report.html" class="button">View Reports & Pricing</a>
-  <br><br>
-  <a href="contact.html" class="button">Other Contact Options</a>
+  <!-- 🔥 FIXED BUTTON GROUP -->
+  <div class="hero-actions">
+    <a href="dmlive.html" class="button">Start Live Chat</a>
+    <a href="report.html" class="button">View Reports & Pricing</a>
+    <a href="contact.html" class="button">Other Contact Options</a>
+  </div>
 </div>
 
 <!-- ================= POST OF THE DAY ================= -->
@@ -71,7 +72,6 @@
 
 <!-- ================= POST MODAL ================= -->
 <div class="post-modal" id="postModal">
-
   <div class="post-modal-box">
 
     <div class="post-close" onclick="closePost()">✕</div>
@@ -118,14 +118,12 @@
 <!-- ================= JS ================= -->
 <script>
   function openPost() {
-    const modal = document.getElementById("postModal");
-    modal.classList.add("active");
+    document.getElementById("postModal").classList.add("active");
     document.body.style.overflow = "hidden";
   }
 
   function closePost() {
-    const modal = document.getElementById("postModal");
-    modal.classList.remove("active");
+    document.getElementById("postModal").classList.remove("active");
     document.body.style.overflow = "auto";
   }
 
