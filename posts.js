@@ -1,8 +1,3 @@
-document.body.insertAdjacentHTML(
-  "afterbegin",
-  "<div style='padding:10px;color:#22c55e;font-size:14px'>posts.js LOADED</div>"
-);
-
 console.log("posts.js LOADED");
 
 /* ================= FIREBASE IMPORTS ================= */
@@ -10,8 +5,6 @@ import {
   db,
   collection,
   getDocs,
-  query,
-  orderBy,
   doc,
   updateDoc,
   increment
@@ -22,7 +15,7 @@ const postSection = document.querySelector(".post-highlight");
 const modal = document.getElementById("postModal");
 
 if (!postSection) {
-  console.error("❌ .post-highlight container not found");
+  console.error("❌ .post-highlight not found");
 }
 
 /* ================= POSTS CONTAINER ================= */
@@ -39,27 +32,14 @@ async function loadPosts() {
   cardsContainer.innerHTML = "";
 
   try {
-    /* 🔥 SAFE QUERY (works even if createdAt missing) */
-    let q;
-    try {
-      q = query(
-        collection(db, "posts"),
-        orderBy("createdAt", "desc")
-      );
-    } catch {
-      q = query(collection(db, "posts"));
-    }
+    // 🔥 NO orderBy – GitHub Pages SAFE
+    const snapshot = await getDocs(collection(db, "posts"));
 
-    const snapshot = await getDocs(q);
-
-    console.log("📦 POSTS FOUND:", snapshot.size);
+    console.log("📦 Posts found:", snapshot.size);
 
     if (snapshot.empty) {
-      cardsContainer.innerHTML = `
-        <p style="opacity:.6; text-align:center; margin-top:24px;">
-          No posts yet.
-        </p>
-      `;
+      cardsContainer.innerHTML =
+        "<p style='opacity:.6;text-align:center'>No posts yet.</p>";
       return;
     }
 
@@ -67,11 +47,7 @@ async function loadPosts() {
       const post = docSnap.data();
       const postId = docSnap.id;
 
-      /* ================= GUARDS ================= */
-      if (!post.title || !post.content) {
-        console.warn("⚠️ Skipping invalid post:", postId);
-        return;
-      }
+      if (!post.title || !post.content) return;
 
       const card = document.createElement("div");
       card.className = "post-card";
@@ -105,81 +81,65 @@ async function loadPosts() {
     });
 
   } catch (err) {
-    console.error("❌ Failed to load posts:", err);
-    cardsContainer.innerHTML = `
-      <p style="color:#f87171; text-align:center;">
-        Error loading posts.
-      </p>
-    `;
+    console.error("❌ Error loading posts:", err);
+    cardsContainer.innerHTML =
+      "<p style='color:red;text-align:center'>Error loading posts</p>";
   }
 }
 
-/* ================= OPEN POST (MODAL) ================= */
+/* ================= OPEN POST ================= */
 async function openPostFromData(postId, post) {
-  /* 🔥 Increment views (non-blocking) */
+  // increment views (safe)
   try {
     const ref = doc(db, "posts", postId);
     await updateDoc(ref, { views: increment(1) });
   } catch (e) {
-    console.warn("⚠️ View increment failed:", e.message);
+    console.warn("View increment failed");
   }
 
-  /* ================= FILL MODAL ================= */
-  const titleEl = modal.querySelector("h1");
-  const statsEl = modal.querySelector(".post-stats");
-  const contentEl = modal.querySelector(".post-content");
+  modal.querySelector("h1").innerText = post.title;
 
-  if (titleEl) titleEl.innerText = post.title;
+  modal.querySelector(".post-stats").innerHTML = `
+    <span>👁 ${(post.views ?? 0) + 1} views</span>
+    <span>📍 ${post.source || "Direct"}</span>
+    <span>🕒 Updated Today</span>
+  `;
 
-  if (statsEl) {
-    statsEl.innerHTML = `
-      <span>👁 ${(post.views ?? 0) + 1} views</span>
-      <span>📍 ${post.source || "Direct"}</span>
-      <span>🕒 Updated Today</span>
-    `;
-  }
+  const contentBox = modal.querySelector(".post-content");
+  contentBox.innerHTML = "";
 
-  if (contentEl) {
-    contentEl.innerHTML = "";
-
-    post.content
-      .split("\n")
-      .filter(p => p.trim())
-      .forEach(p => {
-        const para = document.createElement("p");
-        para.innerText = p;
-        para.style.marginBottom = "18px";
-        contentEl.appendChild(para);
-      });
-  }
+  post.content
+    .split("\n")
+    .filter(p => p.trim())
+    .forEach(p => {
+      const para = document.createElement("p");
+      para.innerText = p;
+      para.style.marginBottom = "18px";
+      contentBox.appendChild(para);
+    });
 
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
-/* ================= CLOSE POST ================= */
+/* ================= CLOSE / SHARE ================= */
 window.closePost = function () {
   modal.classList.remove("active");
   document.body.style.overflow = "auto";
 };
 
-/* ================= SHARE ================= */
 window.sharePost = function () {
-  const title =
-    modal.querySelector("h1")?.innerText || "LagneshMitra Post";
-
   if (navigator.share) {
     navigator.share({
-      title: title,
-      text: "Read this post on LagneshMitra",
+      title: modal.querySelector("h1").innerText,
       url: window.location.href
     });
   } else {
-    alert("Copy link and share manually.");
+    alert("Copy link and share manually");
   }
 };
 
-/* ================= HELPERS ================= */
+/* ================= HELPER ================= */
 function escapeHTML(str) {
   return String(str)
     .replaceAll("&", "&amp;")
@@ -191,4 +151,3 @@ function escapeHTML(str) {
 
 /* ================= INIT ================= */
 loadPosts();
-
