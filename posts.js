@@ -1,3 +1,7 @@
+document.body.insertAdjacentHTML(
+  "beforeend",
+  "<div style='color:#22c55e;padding:12px;font-weight:bold'>POSTS.JS EXECUTED</div>"
+);
 console.log("✅ posts.js LOADED");
 
 /* ================= FIREBASE IMPORTS ================= */
@@ -164,3 +168,4 @@ function escapeHTML(str) {
 
 /* ================= INIT ================= */
 loadPosts();
+
