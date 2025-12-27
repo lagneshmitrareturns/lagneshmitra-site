@@ -55,7 +55,7 @@ nav {
   white-space: nowrap;
 }
 
-/* 🔥 FIXED NAV LINKS */
+/* ================= NAV LINKS ================= */
 .nav-links {
   display: flex;
   gap: 22px;
@@ -161,6 +161,39 @@ nav a.active::after {
 .button:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 40px rgba(250, 204, 21, 0.6);
+}
+
+/* =====================================================
+   ADD POST / ADMIN FORM
+===================================================== */
+
+.post-form {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.post-form label {
+  display: block;
+  margin: 18px 0 6px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.post-form input,
+.post-form textarea {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.post-form textarea {
+  min-height: 220px;
+  resize: vertical;
 }
 
 /* ================= MOBILE ================= */
