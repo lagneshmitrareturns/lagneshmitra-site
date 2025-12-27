@@ -12,7 +12,6 @@
 <!-- ================= NAVBAR ================= -->
 <nav>
   <div class="brand">LagneshMitra</div>
-
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
     <a href="#">Consultation</a>
@@ -26,7 +25,6 @@
 <!-- ================= HERO / USP ================= -->
 <div class="main">
   <h2>Astrology with Structure, Not Guesswork</h2>
-
   <p>
     Marriage • Career • Timing • Karmic Patterns<br>
     Clear answers. No fluff. No drama.
@@ -41,15 +39,13 @@
 
 <!-- ================= POST OF THE DAY ================= -->
 <div class="post-highlight">
-
   <h3>Post of the Day</h3>
 
-  <div class="post-card">
+  <!-- 🔥 CLICKABLE CARD -->
+  <div class="post-card" onclick="openPost()">
 
     <h4>
-      <a href="post.html">
-        Why Saturn Delays Marriage (And What It Actually Means)
-      </a>
+      Why Saturn Delays Marriage (And What It Actually Means)
     </h4>
 
     <p>
@@ -63,13 +59,87 @@
     </div>
 
     <div class="post-actions">
-      <a href="post.html" class="button small">Read Full Post</a>
+      <span class="button small">Read Full Post</span>
       <a href="chat.html" class="button outline">Talk to LagneshMitra</a>
     </div>
 
   </div>
-
 </div>
+
+<!-- ================= POST MODAL (POPUP) ================= -->
+<div class="post-modal" id="postModal">
+
+  <div class="post-modal-box">
+
+    <!-- ❌ CLOSE -->
+    <div class="post-close" onclick="closePost()">✕</div>
+
+    <h1>Why Saturn Delays Marriage</h1>
+    <span class="subtitle">(And What It Actually Means)</span>
+
+    <div class="post-stats">
+      <span>👁 1,248 views</span>
+      <span>📍 Traffic: Reddit / Direct</span>
+      <span>🕒 Updated: Today</span>
+    </div>
+
+    <div class="post-content">
+      <p>
+        When Saturn is connected to marriage, people immediately panic.
+        They assume denial, loss, or lifelong delay. That assumption is
+        incorrect.
+      </p>
+
+      <p>
+        Saturn does not deny marriage. Saturn delays marriage until
+        emotional maturity, self-respect and inner stability are achieved.
+      </p>
+
+      <p>
+        In charts where Saturn influences the 7th house, Venus, or marriage
+        significators, relationships do not sustain unless they are
+        emotionally grounded and responsibility-based.
+      </p>
+
+      <p>
+        What looks like delay is actually preparation. Saturn removes weak,
+        impulsive and unstable connections so that only long-term,
+        realistic partnerships survive.
+      </p>
+    </div>
+
+    <div class="post-actions-full">
+      <a href="chat.html" class="button">Talk to LagneshMitra</a>
+      <button class="button outline" onclick="sharePost()">Share</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+  function openPost() {
+    document.getElementById("postModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePost() {
+    document.getElementById("postModal").classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+
+  function sharePost() {
+    if (navigator.share) {
+      navigator.share({
+        title: "Why Saturn Delays Marriage",
+        text: "A clear explanation of Saturn’s role in marriage.",
+        url: window.location.href
+      });
+    } else {
+      alert("Copy link and share manually.");
+    }
+  }
+</script>
 
 </body>
 </html>
