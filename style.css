@@ -1,3 +1,4 @@
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +9,10 @@
 :root {
   --bg-main: #020617;
   --bg-top: #111827;
+
   --text-main: #e5e7eb;
   --text-soft: #cbd5f5;
+
   --accent: #facc15;
   --accent-dark: #f59e0b;
 }
@@ -27,15 +30,18 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
+
   display: flex;
   align-items: center;
   gap: 22px;
+
   padding: 12px 18px;
   background: linear-gradient(
     90deg,
     rgba(15,23,42,0.95),
     rgba(2,6,23,0.95)
   );
+
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 8px 24px rgba(0,0,0,0.45);
@@ -70,13 +76,25 @@ nav a.active {
   margin: 48px auto;
   padding: 44px;
   background: linear-gradient(180deg,#0f172a,#020617);
-  border-radius: 20px;
+  border-radius: 22px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.55);
   text-align: center;
 }
 
+.main h2 {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.main p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
 /* ================= BUTTON ================= */
 .button {
+  display: inline-block;
   margin-top: 22px;
   padding: 13px 30px;
   background: linear-gradient(135deg,var(--accent),var(--accent-dark));
@@ -85,11 +103,12 @@ nav a.active {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.25s;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .button:hover {
   transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(250,204,21,0.6);
 }
 
 .button.outline {
@@ -98,36 +117,53 @@ nav a.active {
   border: 1px solid var(--accent);
 }
 
-/* ================= POST OF THE DAY ================= */
+/* =====================================================
+   POST OF THE DAY (INDEX)
+===================================================== */
+
 .post-highlight {
-  max-width: 100%;
+  width: 100%;
   margin: 48px auto;
   padding: 0 16px;
 }
 
+.post-highlight h3 {
+  max-width: 960px;
+  margin: 0 auto 18px;
+  color: var(--accent);
+}
+
+/* ================= POST CARD ================= */
 .post-card {
-  max-width: 920px;                 /* 🔥 editorial width */
+  max-width: 960px;        /* ✅ fit-to-screen */
   margin: 0 auto;
+
   background: #000;
-  padding: 30px 32px;               /* 🔥 more breathing */
-  border-radius: 20px;
+  padding: 32px 36px;
+  border-radius: 22px;
+
   cursor: pointer;
   border: 1px solid rgba(250,204,21,0.25);
-  transition: 0.3s;
+
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  will-change: box-shadow; /* 🔒 no layout shift */
 }
 
 .post-card:hover {
-  transform: translateY(-6px);
+  border-color: rgba(250,204,21,0.6);
   box-shadow:
-    0 30px 70px rgba(0,0,0,0.85),
-    0 0 28px rgba(250,204,21,0.25);
+    0 28px 70px rgba(0,0,0,0.9),
+    0 0 30px rgba(250,204,21,0.22);
 }
 
-/* 🔥 TITLE */
+/* ================= TITLE ================= */
 .post-card h4 {
-  font-size: 19px;
-  line-height: 1.4;
-  margin-bottom: 18px;              /* ✅ title–body gap */
+  font-size: 20px;
+  line-height: 1.45;
+  margin-bottom: 22px;   /* ✅ title–body gap */
   color: #f9fafb;
 }
 
@@ -135,28 +171,32 @@ nav a.active {
   color: var(--accent);
 }
 
-/* 🔥 BODY */
+/* ================= BODY ================= */
 .post-card p {
-  font-size: 15px;
-  line-height: 1.85;
+  font-size: 15.5px;
+  line-height: 1.9;
   color: var(--text-soft);
-  margin-bottom: 18px;              /* ✅ body–meta gap */
+  margin-bottom: 22px;
 }
 
-/* META */
+/* ================= META ================= */
 .post-meta {
   font-size: 13px;
   opacity: 0.75;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
 }
 
-/* ================= MODAL ================= */
+/* =====================================================
+   POST MODAL (POPUP)
+===================================================== */
+
 .post-modal {
   position: fixed;
   inset: 0;
   background: rgba(2,6,23,0.95);
   backdrop-filter: blur(8px);
   z-index: 5000;
+
   display: none;
   align-items: center;
   justify-content: center;
@@ -167,24 +207,29 @@ nav a.active {
   display: flex;
 }
 
+/* ================= MODAL BOX ================= */
 .post-modal-box {
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
+
   background: linear-gradient(180deg,#0f172a,#020617);
   border-radius: 26px;
   padding: 36px 30px;
+
   overflow-y: auto;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.9);
   position: relative;
+
+  box-shadow: 0 40px 100px rgba(0,0,0,0.9);
   animation: popupIn 0.25s ease-out;
 }
 
 @keyframes popupIn {
   from { transform: scale(0.96); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
+/* ================= CLOSE ================= */
 .post-close {
   position: absolute;
   top: 14px;
@@ -196,16 +241,27 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  .main {
+    margin: 36px 16px;
+    padding: 30px 24px;
+  }
+
   .post-card {
-    padding: 22px 20px;
+    padding: 24px 22px;
+    border-radius: 18px;
   }
 
   .post-card h4 {
-    font-size: 17px;
+    font-size: 17.5px;
   }
 
   .post-modal-box {
     max-width: 95%;
     padding: 24px;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
   }
 }
