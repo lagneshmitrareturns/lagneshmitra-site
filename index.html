@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>LagneshMitra – Astrology with Structure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
 <!-- ================= POSTS (AUTO FROM FIREBASE) ================= -->
 <div class="post-highlight">
   <h3>Latest Posts</h3>
-  <!-- 🔥 post-card elements injected by posts.js -->
+  <!-- 🔥 post-card elements will be injected here by posts.js -->
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -73,7 +73,6 @@
       <span>📍 ${post.source || "Direct"}</span>
     `;
 
-    // convert plain text → paragraphs
     const contentDiv = document.getElementById("modalContent");
     contentDiv.innerHTML = "";
 
@@ -81,7 +80,7 @@
       if (p.trim()) {
         const para = document.createElement("p");
         para.innerText = p;
-        para.style.marginBottom = "18px";   // ✅ body gap fix
+        para.style.marginBottom = "18px";   // ✅ body gap fixed
         contentDiv.appendChild(para);
       }
     });
@@ -102,14 +101,14 @@
         url: window.location.href
       });
     } else {
-      alert("Copy link and share manually.");
+      alert("Please copy the link and share manually.");
     }
   }
 </script>
 
 <!-- ================= FIREBASE + POSTS ================= -->
-<script type="module" src="/firebase.js"></script>
-<script type="module" src="/posts.js"></script>
+<script type="module" src="firebase.js"></script>
+<script type="module" src="posts.js"></script>
 
 </body>
 </html>
