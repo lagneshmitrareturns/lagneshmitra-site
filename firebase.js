@@ -1,16 +1,23 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// firebase.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "XXXX",
-    authDomain: "XXXX",
-    projectId: "XXXX",
-    storageBucket: "XXXX",
-    messagingSenderId: "XXXX",
-    appId: "XXXX"
-  };
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
 
-  export const app = initializeApp(firebaseConfig);
-  export const db = getFirestore(app);
-</script>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db, collection, getDocs, query, orderBy };
