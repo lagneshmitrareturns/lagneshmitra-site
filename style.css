@@ -304,3 +304,26 @@ nav a.active {
     text-align: center;
   }
 }
+
+/* ===== POPUP: STATS → BODY GAP FIX ===== */
+
+/* Stats ke neeche strong separation */
+.post-stats {
+  margin-bottom: 28px;                 /* ⬅️ already ok, keep */
+}
+
+/* 🔥 BODY START GAP */
+.post-content {
+  margin-top: 26px;                    /* ⬅️ THIS WAS MISSING */
+}
+
+/* Extra safety: first paragraph */
+.post-content p:first-child {
+  margin-top: 0;                       /* avoid double spacing */
+}
+
+/* Normal paragraph spacing */
+.post-content p {
+  margin-bottom: 22px;
+  line-height: 1.85;
+}
