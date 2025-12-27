@@ -9,6 +9,7 @@
 :root {
   --bg-main: #020617;
   --bg-top: #111827;
+  --bg-card: #0f172a;
 
   --text-main: #e5e7eb;
   --text-soft: #cbd5f5;
@@ -34,30 +35,33 @@ nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 18px;
 
-  padding: 12px 18px;
+  gap: 20px;
+  padding: 12px 20px;
+
   background: linear-gradient(
     90deg,
-    rgba(15,23,42,0.95),
-    rgba(2,6,23,0.95)
+    rgba(15, 23, 42, 0.95),
+    rgba(2, 6, 23, 0.95)
   );
 
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .brand {
   font-size: 20px;
   font-weight: 600;
+  letter-spacing: 1px;
   color: var(--accent);
   white-space: nowrap;
 }
 
+/* ================= NAV LINKS ================= */
 .nav-links {
   display: flex;
-  gap: 18px;
+  gap: 22px;
   margin-left: auto;
   flex-wrap: wrap;
 }
@@ -66,6 +70,7 @@ nav a {
   color: #f9fafb;
   text-decoration: none;
   font-weight: 500;
+  position: relative;
   white-space: nowrap;
 }
 
@@ -74,29 +79,54 @@ nav a.active {
   color: var(--accent);
 }
 
-/* ================= HERO ================= */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  transition: width 0.25s ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
+}
+
+/* ================= HERO / MAIN ================= */
 .main {
   max-width: 1100px;
   margin: 48px auto;
   padding: 44px;
-  background: linear-gradient(180deg,#0f172a,#020617);
-  border-radius: 22px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(2, 6, 23, 0.95)
+  );
+
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
   text-align: center;
 }
 
 .main h2 {
   font-size: 32px;
-  margin-bottom: 12px;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: 0.6px;
+  color: #f9fafb;
 }
 
 .main p {
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--text-soft);
 }
 
-/* ================= HERO BUTTONS ================= */
+/* ================= HERO ACTIONS ================= */
 .hero-actions {
   display: flex;
   justify-content: center;
@@ -105,38 +135,36 @@ nav a.active {
   flex-wrap: wrap;
 }
 
-.hero-actions .button {
-  margin-top: 0;
-}
-
 /* ================= BUTTON ================= */
 .button {
   display: inline-block;
   padding: 13px 30px;
-  background: linear-gradient(135deg,var(--accent),var(--accent-dark));
+
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   color: #020617;
+
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  box-shadow: 0 10px 30px rgba(250, 204, 21, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(250,204,21,0.6);
+  box-shadow: 0 16px 40px rgba(250, 204, 21, 0.6);
 }
 
 .button.outline {
   background: transparent;
   color: var(--accent);
   border: 1px solid var(--accent);
+  box-shadow: none;
 }
 
-/* =====================================================
-   POST OF THE DAY
-===================================================== */
-
+/* ================= POSTS BASE (SAFE) ================= */
 .post-highlight {
   width: 100%;
   margin: 48px auto;
@@ -149,32 +177,38 @@ nav a.active {
   color: var(--accent);
 }
 
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
 /* ================= POST CARD ================= */
 .post-card {
   max-width: 960px;
   margin: 0 auto;
 
   background: #000;
-  padding: 34px 38px;
+  padding: 32px 36px;
   border-radius: 22px;
 
   cursor: pointer;
-  border: 1px solid rgba(250,204,21,0.25);
+  border: 1px solid rgba(250, 204, 21, 0.25);
+
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .post-card:hover {
-  border-color: rgba(250,204,21,0.6);
+  border-color: rgba(250, 204, 21, 0.6);
   box-shadow:
-    0 28px 70px rgba(0,0,0,0.9),
-    0 0 30px rgba(250,204,21,0.22);
+    0 28px 70px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(250, 204, 21, 0.22);
 }
 
-/* TITLE */
 .post-card h4 {
   font-size: 20px;
   line-height: 1.45;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   color: #f9fafb;
 }
 
@@ -182,29 +216,24 @@ nav a.active {
   color: var(--accent);
 }
 
-/* BODY */
 .post-card p {
   font-size: 15.5px;
-  line-height: 1.85;
+  line-height: 1.9;
   color: var(--text-soft);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
-/* META */
 .post-meta {
   font-size: 13px;
   opacity: 0.75;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
-/* =====================================================
-   POST MODAL (POPUP)
-===================================================== */
-
+/* ================= POST MODAL BASE ================= */
 .post-modal {
   position: fixed;
   inset: 0;
-  background: rgba(2,6,23,0.95);
+  background: rgba(2, 6, 23, 0.95);
   backdrop-filter: blur(8px);
   z-index: 5000;
 
@@ -218,53 +247,22 @@ nav a.active {
   display: flex;
 }
 
-/* MODAL BOX */
 .post-modal-box {
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
 
-  background: linear-gradient(180deg,#0f172a,#020617);
+  background: linear-gradient(180deg, #0f172a, #020617);
   border-radius: 26px;
   padding: 36px 30px;
 
   overflow-y: auto;
   position: relative;
 
-  box-shadow: 0 40px 100px rgba(0,0,0,0.9);
-  animation: popupIn 0.25s ease-out;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
 }
 
-@keyframes popupIn {
-  from { transform: scale(0.96); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-
-/* POPUP CONTENT SPACING FIX */
-.post-modal-box h1 {
-  margin-bottom: 6px;
-}
-
-.post-modal-box .subtitle {
-  display: block;
-  margin-bottom: 18px;
-  color: var(--accent);
-}
-
-.post-stats {
-  margin-bottom: 26px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  font-size: 13px;
-  opacity: 0.75;
-}
-
-.post-content p {
-  margin-bottom: 22px;
-  line-height: 1.85;
-}
-
-/* CLOSE */
+/* ================= CLOSE ================= */
 .post-close {
   position: absolute;
   top: 14px;
@@ -276,13 +274,31 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+  nav {
+    gap: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .main {
     margin: 36px 16px;
     padding: 30px 24px;
   }
 
+  .main h2 {
+    font-size: 26px;
+  }
+
   .hero-actions {
     gap: 14px;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
   }
 
   .post-card {
@@ -298,148 +314,4 @@ nav a.active {
     max-width: 95%;
     padding: 24px;
   }
-
-  .button {
-    width: 100%;
-    text-align: center;
-  }
 }
-
-/* ===== POPUP: STATS → BODY GAP FIX ===== */
-
-console.log("posts.js LOADED");
-
-import {
-  db,
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  doc,
-  updateDoc,
-  increment
-} from "./firebase.js";
-
-/* ================= DOM TARGETS ================= */
-const postSection = document.querySelector(".post-highlight");
-const modal = document.getElementById("postModal");
-
-/* ================= CREATE POSTS CONTAINER ================= */
-let cardsContainer = postSection.querySelector(".posts-container");
-
-if (!cardsContainer) {
-  cardsContainer = document.createElement("div");
-  cardsContainer.className = "posts-container";
-  postSection.appendChild(cardsContainer);
-}
-
-/* ================= LOAD POSTS ================= */
-async function loadPosts() {
-  try {
-    const q = query(
-      collection(db, "posts"),
-      orderBy("createdAt", "desc")
-    );
-
-    const snapshot = await getDocs(q);
-
-    if (snapshot.empty) {
-      console.warn("No posts found in Firestore");
-      cardsContainer.innerHTML =
-        "<p style='opacity:.6'>No posts yet.</p>";
-      return;
-    }
-
-    snapshot.forEach(docSnap => {
-      const post = docSnap.data();
-      const postId = docSnap.id;
-
-      /* SAFETY GUARDS */
-      if (!post.title || !post.content) return;
-
-      const card = document.createElement("div");
-      card.className = "post-card";
-      card.setAttribute("role", "button");
-      card.setAttribute("tabindex", "0");
-
-      card.onclick = () => openPostFromData(postId, post);
-      card.onkeypress = e => {
-        if (e.key === "Enter") openPostFromData(postId, post);
-      };
-
-      card.innerHTML = `
-        <h4>${post.title}</h4>
-
-        <p>${post.excerpt ?? ""}</p>
-
-        <div class="post-meta">
-          👁 ${post.views ?? 0} views &nbsp; | &nbsp;
-          📍 ${post.source ?? "Direct"}
-        </div>
-
-        <div class="post-actions" onclick="event.stopPropagation();">
-          <span class="button">Read Full Post</span>
-          <a href="chat.html" class="button outline">
-            Talk to LagneshMitra
-          </a>
-        </div>
-      `;
-
-      cardsContainer.appendChild(card);
-    });
-  } catch (err) {
-    console.error("Failed to load posts:", err);
-  }
-}
-
-/* ================= OPEN POST ================= */
-async function openPostFromData(postId, post) {
-  /* INCREMENT VIEWS (NON-BLOCKING) */
-  try {
-    const ref = doc(db, "posts", postId);
-    await updateDoc(ref, { views: increment(1) });
-  } catch (e) {
-    console.warn("View increment failed:", e.message);
-  }
-
-  /* FILL MODAL */
-  modal.querySelector("h1").innerText = post.title;
-
-  modal.querySelector(".post-stats").innerHTML = `
-    <span>👁 ${(post.views ?? 0) + 1} views</span>
-    <span>📍 ${post.source ?? "Direct"}</span>
-    <span>🕒 Updated Today</span>
-  `;
-
-  modal.querySelector(".post-content").innerHTML =
-    post.content
-      .split("\n")
-      .filter(p => p.trim())
-      .map(p => `<p style="margin-bottom:18px;">${p}</p>`)
-      .join("");
-
-  modal.classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-/* ================= CLOSE POST ================= */
-window.closePost = function () {
-  modal.classList.remove("active");
-  document.body.style.overflow = "auto";
-};
-
-/* ================= SHARE ================= */
-window.sharePost = function () {
-  if (navigator.share) {
-    navigator.share({
-      title: modal.querySelector("h1").innerText,
-      text: "Read this post on LagneshMitra",
-      url: window.location.href
-    });
-  } else {
-    alert("Copy link and share manually.");
-  }
-};
-
-/* ================= INIT ================= */
-loadPosts();
