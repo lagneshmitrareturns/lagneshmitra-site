@@ -30,7 +30,6 @@
     Clear answers. No fluff. No drama.
   </p>
 
-  <!-- 🔥 FIXED BUTTON GROUP -->
   <div class="hero-actions">
     <a href="dmlive.html" class="button">Start Live Chat</a>
     <a href="report.html" class="button">View Reports & Pricing</a>
@@ -42,7 +41,7 @@
 <div class="post-highlight">
   <h3>Post of the Day</h3>
 
-  <!-- FULL CARD CLICK -->
+  <!-- 🔥 STATIC FOR NOW (WILL COME FROM FIREBASE NEXT) -->
   <div class="post-card"
        role="button"
        tabindex="0"
@@ -61,12 +60,10 @@
       👁 1,248 views &nbsp; | &nbsp; 📍 Reddit / Direct
     </div>
 
-    <!-- ACTIONS -->
     <div class="post-actions" onclick="event.stopPropagation();">
       <span class="button">Read Full Post</span>
       <a href="chat.html" class="button outline">Talk to LagneshMitra</a>
     </div>
-
   </div>
 </div>
 
@@ -115,7 +112,7 @@
   </div>
 </div>
 
-<!-- ================= JS ================= -->
+<!-- ================= CORE JS ================= -->
 <script>
   function openPost() {
     document.getElementById("postModal").classList.add("active");
@@ -139,6 +136,9 @@
     }
   }
 </script>
+
+<!-- ================= FIREBASE (MODULE) ================= -->
+<script type="module" src="/firebase.js"></script>
 
 </body>
 </html>
