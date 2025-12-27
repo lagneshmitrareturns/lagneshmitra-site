@@ -273,3 +273,16 @@ nav a.active {
     text-align: center;
   }
 }
+
+/* ================= HERO BUTTON FIX ================= */
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+  flex-wrap: wrap; /* mobile safe */
+}
+
+.hero-actions .button {
+  margin-top: 0;   /* 🔥 remove inherited margin */
+}
