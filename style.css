@@ -33,7 +33,7 @@ nav {
 
   display: flex;
   align-items: center;
-  flex-wrap: wrap;                /* ✅ FIX */
+  flex-wrap: wrap;
   gap: 18px;
 
   padding: 12px 18px;
@@ -55,12 +55,11 @@ nav {
   white-space: nowrap;
 }
 
-/* 🔥 NAV LINKS SAFE */
 .nav-links {
   display: flex;
   gap: 18px;
   margin-left: auto;
-  flex-wrap: wrap;               /* ✅ FIX */
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -88,19 +87,31 @@ nav a.active {
 
 .main h2 {
   font-size: 32px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .main p {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--text-soft);
+}
+
+/* ================= HERO BUTTONS ================= */
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.hero-actions .button {
+  margin-top: 0;
 }
 
 /* ================= BUTTON ================= */
 .button {
   display: inline-block;
-  margin-top: 22px;
   padding: 13px 30px;
   background: linear-gradient(135deg,var(--accent),var(--accent-dark));
   color: #020617;
@@ -108,7 +119,7 @@ nav a.active {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .button:hover {
@@ -149,7 +160,6 @@ nav a.active {
 
   cursor: pointer;
   border: 1px solid rgba(250,204,21,0.25);
-
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -164,7 +174,7 @@ nav a.active {
 .post-card h4 {
   font-size: 20px;
   line-height: 1.45;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   color: #f9fafb;
 }
 
@@ -175,20 +185,20 @@ nav a.active {
 /* BODY */
 .post-card p {
   font-size: 15.5px;
-  line-height: 1.9;
+  line-height: 1.85;
   color: var(--text-soft);
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 /* META */
 .post-meta {
   font-size: 13px;
   opacity: 0.75;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 /* =====================================================
-   POST MODAL
+   POST MODAL (POPUP)
 ===================================================== */
 
 .post-modal {
@@ -208,6 +218,7 @@ nav a.active {
   display: flex;
 }
 
+/* MODAL BOX */
 .post-modal-box {
   max-width: 600px;
   width: 100%;
@@ -229,6 +240,31 @@ nav a.active {
   to   { transform: scale(1); opacity: 1; }
 }
 
+/* POPUP CONTENT SPACING FIX */
+.post-modal-box h1 {
+  margin-bottom: 6px;
+}
+
+.post-modal-box .subtitle {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+}
+
+.post-stats {
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.post-content p {
+  margin-bottom: 22px;
+  line-height: 1.85;
+}
+
+/* CLOSE */
 .post-close {
   position: absolute;
   top: 14px;
@@ -240,18 +276,13 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
-  nav {
-    gap: 12px;
-  }
-
-  .nav-links {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
   .main {
     margin: 36px 16px;
     padding: 30px 24px;
+  }
+
+  .hero-actions {
+    gap: 14px;
   }
 
   .post-card {
@@ -272,17 +303,4 @@ nav a.active {
     width: 100%;
     text-align: center;
   }
-}
-
-/* ================= HERO BUTTON FIX ================= */
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  margin-top: 26px;
-  flex-wrap: wrap; /* mobile safe */
-}
-
-.hero-actions .button {
-  margin-top: 0;   /* 🔥 remove inherited margin */
 }
