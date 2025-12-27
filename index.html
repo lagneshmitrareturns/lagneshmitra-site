@@ -22,7 +22,7 @@
   </div>
 </nav>
 
-<!-- ================= HERO / USP ================= -->
+<!-- ================= HERO ================= -->
 <div class="main">
   <h2>Astrology with Structure, Not Guesswork</h2>
   <p>
@@ -41,12 +41,16 @@
 <div class="post-highlight">
   <h3>Post of the Day</h3>
 
-  <!-- 🔥 CLICKABLE CARD -->
-  <div class="post-card" onclick="openPost()">
+  <!-- 🔥 FULL CARD = BUTTON -->
+  <div
+    class="post-card"
+    role="button"
+    tabindex="0"
+    onclick="openPost()"
+    onkeypress="if(event.key==='Enter'){openPost();}"
+  >
 
-    <h4>
-      Why Saturn Delays Marriage (And What It Actually Means)
-    </h4>
+    <h4>Why Saturn Delays Marriage (And What It Actually Means)</h4>
 
     <p>
       Saturn does not deny marriage. It delays it so that emotional
@@ -58,15 +62,16 @@
       👁 1,248 views &nbsp; | &nbsp; 📍 Reddit / Direct
     </div>
 
-    <div class="post-actions">
-      <span class="button small">Read Full Post</span>
+    <!-- 👇 ACTIONS (STOP CLICK PROPAGATION) -->
+    <div class="post-actions" onclick="event.stopPropagation();">
+      <span class="button">Read Full Post</span>
       <a href="chat.html" class="button outline">Talk to LagneshMitra</a>
     </div>
 
   </div>
 </div>
 
-<!-- ================= POST MODAL (POPUP) ================= -->
+<!-- ================= POST MODAL ================= -->
 <div class="post-modal" id="postModal">
 
   <div class="post-modal-box">
