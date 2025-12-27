@@ -1,48 +1,60 @@
-console.log("🔥 posts.js LOADED");
+console.log("posts.js running in SAFE MODE");
 
-/* HARD PROOF BANNER */
-document.body.insertAdjacentHTML(
-  "afterbegin",
-  `
-  <div style="
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:9999;
-    background:#22c55e;
-    color:#020617;
-    padding:10px;
-    font-weight:700;
-    text-align:center;
-  ">
-    ✅ posts.js CONNECTED SUCCESSFULLY
-  </div>
-  `
-);
-
-/* TARGET */
+/* ================= DOM TARGET ================= */
 const postSection = document.querySelector(".post-highlight");
 
 if (!postSection) {
-  alert("❌ .post-highlight NOT FOUND");
-} else {
-  const container = document.createElement("div");
-  container.className = "posts-container";
-
-  container.innerHTML = `
-    <div class="post-card">
-      <h4>TEST POST #1</h4>
-      <p>If this changes, posts.js → index.html is LIVE.</p>
-      <div class="post-meta">👁 0 views | 📍 Test</div>
-    </div>
-
-    <div class="post-card">
-      <h4>TEST POST #2</h4>
-      <p>Edit posts.js and refresh — this text should update.</p>
-      <div class="post-meta">👁 0 views | 📍 Debug</div>
-    </div>
-  `;
-
-  postSection.appendChild(container);
+  console.error("post-highlight not found");
 }
+
+/* ================= TEMP POSTS DATA ================= */
+const TEMP_POSTS = [
+  {
+    title: "Why Saturn Delays Marriage (And What It Actually Means)",
+    excerpt:
+      "Saturn does not deny marriage. It delays it so that emotional maturity, responsibility, and inner stability are formed before commitment.",
+    views: 1248,
+    source: "Reddit / Direct"
+  },
+  {
+    title: "Strong Lagna vs Strong Moon – What Actually Matters?",
+    excerpt:
+      "Most people misunderstand strength in a chart. A strong Lagna gives direction, a strong Moon gives stability — imbalance causes chaos.",
+    views: 642,
+    source: "Website"
+  },
+  {
+    title: "Karmic Relationships: Why Some Bonds Refuse To Break",
+    excerpt:
+      "If a relationship keeps returning despite logic, distance, or time — it is karmic, not emotional dependency.",
+    views: 911,
+    source: "Astrology Notes"
+  }
+];
+
+/* ================= RENDER POSTS ================= */
+function renderPosts() {
+  TEMP_POSTS.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "post-card";
+
+    card.innerHTML = `
+      <h4>${post.title}</h4>
+      <p>${post.excerpt}</p>
+
+      <div class="post-meta">
+        👁 ${post.views} views &nbsp; | &nbsp; 📍 ${post.source}
+      </div>
+
+      <div class="post-actions">
+        <span class="button">Read Full Post</span>
+        <a href="chat.html" class="button outline">Talk to LagneshMitra</a>
+      </div>
+    `;
+
+    postSection.appendChild(card);
+  });
+}
+
+/* ================= INIT ================= */
+renderPosts();
