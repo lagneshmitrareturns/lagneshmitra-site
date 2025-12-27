@@ -134,6 +134,7 @@ nav a.active::after {
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(250,204,21,0.45);
   transition: all 0.25s ease;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -148,7 +149,7 @@ nav a.active::after {
 }
 
 /* =====================================================
-   POST OF THE DAY CARD (INDEX)
+   POST OF THE DAY (INDEX)
 ===================================================== */
 
 .post-highlight {
@@ -161,7 +162,7 @@ nav a.active::after {
 }
 
 .post-highlight h3 {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   color: var(--accent);
 }
 
@@ -169,6 +170,21 @@ nav a.active::after {
   background: #000;
   padding: 22px;
   border-radius: 16px;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  border: 1px solid rgba(250,204,21,0.08);
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  border: 1px solid rgba(250,204,21,0.35);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.8),
+    0 0 25px rgba(250,204,21,0.18);
+}
+
+.post-card h4 {
+  margin-bottom: 10px;
 }
 
 .post-card h4 a {
@@ -176,20 +192,16 @@ nav a.active::after {
   text-decoration: none;
 }
 
-.post-card h4 a:hover {
-  color: var(--accent);
-}
-
 .post-card p {
-  margin: 12px 0;
   font-size: 14px;
   line-height: 1.7;
+  color: var(--text-soft);
 }
 
 .post-meta {
   font-size: 12px;
   opacity: 0.7;
-  margin-bottom: 12px;
+  margin: 12px 0;
 }
 
 .post-actions {
@@ -199,24 +211,60 @@ nav a.active::after {
 }
 
 /* =====================================================
-   FULL POST PAGE
+   POST MODAL (POPUP FULL POST)
 ===================================================== */
 
-.post-full {
-  max-width: 900px;
-  margin: 60px auto 100px;
-  padding: 40px;
+.post-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.94);
+  backdrop-filter: blur(8px);
+  z-index: 5000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.post-modal.active {
+  display: flex;
+}
+
+.post-modal-box {
+  max-width: 880px;
+  width: 100%;
+  max-height: 90vh;
   background: linear-gradient(180deg,#0f172a,#020617);
   border-radius: 22px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+  padding: 36px;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  position: relative;
 }
 
-.post-full h1 {
-  font-size: 30px;
+.post-modal-box::-webkit-scrollbar {
+  width: 6px;
 }
 
-.subtitle {
-  display: block;
+.post-modal-box::-webkit-scrollbar-thumb {
+  background: rgba(250,204,21,0.4);
+  border-radius: 10px;
+}
+
+.post-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.post-modal h1 {
+  font-size: 28px;
+}
+
+.post-modal .subtitle {
   font-size: 14px;
   color: var(--accent);
   margin-top: 6px;
@@ -244,39 +292,6 @@ nav a.active::after {
   flex-wrap: wrap;
 }
 
-/* =====================================================
-   ADD POST / ADMIN FORM
-===================================================== */
-
-.post-form {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.post-form label {
-  margin: 18px 0 6px;
-  display: block;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-.post-form input,
-.post-form textarea {
-  width: 100%;
-  background: #000;
-  color: #fff;
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 14px;
-}
-
-.post-form textarea {
-  min-height: 220px;
-  resize: vertical;
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
   nav {
@@ -294,8 +309,11 @@ nav a.active::after {
     padding: 30px 24px;
   }
 
-  .post-full {
-    margin: 30px 16px 80px;
+  .post-highlight {
+    margin: 40px 16px;
+  }
+
+  .post-modal-box {
     padding: 26px;
   }
 
@@ -303,4 +321,4 @@ nav a.active::after {
     width: 100%;
     text-align: center;
   }
-}
+    }
