@@ -44,43 +44,23 @@
 <!-- ================= VISITOR COUNTER ================= -->
 <div style="
   max-width:1100px;
-  margin:0 auto 24px;
+  margin:12px auto 28px;
   text-align:center;
   font-size:14px;
   opacity:0.75;
 ">
-  👁 Total Visitors: <span id="viewCount">loading...</span>
+  👁 Total Visitors: <span id="viewCount">—</span>
 </div>
 
 <!-- ================= POSTS SECTION ================= -->
 <div class="post-highlight">
   <h3>Latest Posts</h3>
 
-  <!-- 🔒 TEMP STATIC POST (REMOVE LATER IF YOU WANT) -->
+  <!-- TEMP STATIC POST -->
   <div class="post-card">
     <h4>STATIC HTML POST</h4>
     <p>If you can see this, HTML + CSS are working.</p>
     <div class="post-meta">👁 0 views | 📍 HTML</div>
-  </div>
-
-  <!-- 🔥 posts.js WILL INJECT POSTS BELOW -->
-</div>
-
-<!-- ================= POST MODAL ================= -->
-<div class="post-modal" id="postModal">
-  <div class="post-modal-box">
-
-    <div class="post-close" onclick="closePost()">✕</div>
-
-    <h1></h1>
-    <div class="post-stats"></div>
-    <div class="post-content"></div>
-
-    <div class="post-actions-full">
-      <a href="chat.html" class="button">Talk to LagneshMitra</a>
-      <button class="button outline" onclick="sharePost()">Share</button>
-    </div>
-
   </div>
 </div>
 
@@ -96,25 +76,6 @@
       const el = document.getElementById("viewCount");
       if (el) el.innerText = "—";
     });
-</script>
-
-<!-- ================= MODAL HELPERS ================= -->
-<script>
-  function closePost() {
-    document.getElementById("postModal").classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
-
-  function sharePost() {
-    const title =
-      document.querySelector("#postModal h1")?.innerText || "LagneshMitra Post";
-
-    if (navigator.share) {
-      navigator.share({ title, url: window.location.href });
-    } else {
-      alert("Copy link and share manually.");
-    }
-  }
 </script>
 
 <!-- ================= MODULE SCRIPTS ================= -->
