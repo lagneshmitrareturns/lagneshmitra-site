@@ -41,18 +41,29 @@
   </div>
 </div>
 
+<!-- ================= VISITOR COUNTER ================= -->
+<div style="
+  max-width:1100px;
+  margin:0 auto 24px;
+  text-align:center;
+  font-size:14px;
+  opacity:0.75;
+">
+  👁 Total Visitors: <span id="viewCount">loading...</span>
+</div>
+
 <!-- ================= POSTS SECTION ================= -->
 <div class="post-highlight">
   <h3>Latest Posts</h3>
 
-  <!-- 🔒 STATIC HTML PROOF (TEMP) -->
+  <!-- 🔒 TEMP STATIC POST (REMOVE LATER IF YOU WANT) -->
   <div class="post-card">
     <h4>STATIC HTML POST</h4>
     <p>If you can see this, HTML + CSS are working.</p>
     <div class="post-meta">👁 0 views | 📍 HTML</div>
   </div>
 
-  <!-- 🔥 posts.js will inject posts BELOW this -->
+  <!-- 🔥 posts.js WILL INJECT POSTS BELOW -->
 </div>
 
 <!-- ================= POST MODAL ================= -->
@@ -73,10 +84,22 @@
   </div>
 </div>
 
-<!-- ================= CORE JS (ONLY MODAL HELPERS) ================= -->
+<!-- ================= VISITOR COUNTER SCRIPT ================= -->
 <script>
-  alert("www.lagneshmitra.com says:\n\nIndex.html JS IS RUNNING");
+  fetch("https://api.countapi.xyz/hit/lagneshmitra.com/visits")
+    .then(res => res.json())
+    .then(data => {
+      const el = document.getElementById("viewCount");
+      if (el) el.innerText = data.value;
+    })
+    .catch(() => {
+      const el = document.getElementById("viewCount");
+      if (el) el.innerText = "—";
+    });
+</script>
 
+<!-- ================= MODAL HELPERS ================= -->
+<script>
   function closePost() {
     document.getElementById("postModal").classList.remove("active");
     document.body.style.overflow = "auto";
@@ -94,7 +117,7 @@
   }
 </script>
 
-<!-- ================= MODULE SCRIPTS (IMPORTANT ORDER) ================= -->
+<!-- ================= MODULE SCRIPTS ================= -->
 <script type="module" src="./firebase.js"></script>
 <script type="module" src="./posts.js"></script>
 
